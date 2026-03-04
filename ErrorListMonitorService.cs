@@ -8,11 +8,12 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Extension4WithVSSDK
 {
-    internal sealed class ErrorListMonitorService
+    public sealed class ErrorListMonitorService
     {
         private static readonly ErrorListMonitorService _instance = new ErrorListMonitorService();
         public static ErrorListMonitorService Instance => _instance;
 
+        private readonly SimpleFileLogger _logger = new SimpleFileLogger();
         private DTE2 _dte;
         private CancellationTokenSource _cts;
         private bool _hadErrorsBefore;
@@ -27,6 +28,7 @@ namespace Extension4WithVSSDK
             if (_cts != null)
                 return;
 
+            _logger.Log("ErrorListMonitorService.Start chamado.");
             _cts = new CancellationTokenSource();
             _ = ThreadHelper.JoinableTaskFactory.RunAsync(() => MonitorLoopAsync(_cts.Token));
         }
@@ -34,6 +36,7 @@ namespace Extension4WithVSSDK
         private async Task MonitorLoopAsync(CancellationToken cancellationToken)
         {
             Debug.WriteLine("[ErrorListMonitor] Loop iniciado. Aguardando VS estabilizar...");
+            _logger.Log("Loop de monitoramento iniciado.");
 
             try
             {
@@ -90,10 +93,11 @@ namespace Extension4WithVSSDK
             }
             catch (OperationCanceledException)
             {
+                _logger.Log("Loop cancelado.");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[ErrorListMonitor] Falha no loop: {ex.Message}");
+                _logger.Log($"Falha no loop: {ex}");
             }
         }
 
@@ -113,10 +117,10 @@ namespace Extension4WithVSSDK
                         return true;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Debug.WriteLine($"[ErrorListMonitor] HasBuildErrors falhou: {ex.Message}");
             }
+
             return false;
         }
     }

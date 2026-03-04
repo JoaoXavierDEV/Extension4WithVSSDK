@@ -6,7 +6,15 @@
     <LangVersion>12</LangVersion>
     <UseWPF>true</UseWPF>
     <VssdkCompatibleExtension>true</VssdkCompatibleExtension>
-    <GeneratePkgDefFile>true</GeneratePkgDefFile>
+    <GeneratePkgDefFile>false</GeneratePkgDefFile>
+    <Description>A extensão observa a lista de erros, caso exista´será exibido uma janela com uma imagem e reprodizirá um som.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
+    <PackageReleaseNotes>Bugs sempre serão adicionados</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/JoaoXavierDEV/Extension4WithVSSDK</PackageProjectUrl>
+    <Company>HeavyCode</Company>
+    <Title>Error notify meme</Title>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,5 +32,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
   </ItemGroup>
 </Project>

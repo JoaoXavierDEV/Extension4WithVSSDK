@@ -7,7 +7,7 @@ namespace Extension4WithVSSDK
     /// Extension entrypoint for the VisualStudio.Extensibility extension.
     /// </summary>
     [VisualStudioContribution]
-    internal class ExtensionEntrypoint : Extension
+    public class ExtensionEntrypoint : Extension
     {
         /// <inheritdoc />
         public override ExtensionConfiguration ExtensionConfiguration => new()
@@ -18,8 +18,8 @@ namespace Extension4WithVSSDK
         /// <inheritdoc />
         protected override void InitializeServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton<SimpleFileLogger>();
             base.InitializeServices(serviceCollection);
-            ErrorListMonitorService.Instance.Start();
         }
     }
 }

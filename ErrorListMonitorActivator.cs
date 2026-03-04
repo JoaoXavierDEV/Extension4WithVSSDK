@@ -7,7 +7,7 @@ namespace Extension4WithVSSDK
     [Export(typeof(IWpfTextViewCreationListener))]
     [ContentType("text")]
     [TextViewRole(PredefinedTextViewRoles.Document)]
-    internal sealed class ErrorListMonitorActivator : IWpfTextViewCreationListener
+    public sealed class ErrorListMonitorActivator : IWpfTextViewCreationListener
     {
         public void TextViewCreated(IWpfTextView textView)
         {

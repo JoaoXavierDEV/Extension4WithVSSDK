@@ -4,13 +4,13 @@ using Microsoft.VisualStudio.Extensibility;
 using Microsoft.VisualStudio.Extensibility.Commands;
 using Microsoft.VisualStudio.Extensibility.Shell;
 
-namespace Extension4WithVSSDK
+namespace Extension4WithVSSDK.Commands
 {
     /// <summary>
     /// Command1 handler.
     /// </summary>
     [VisualStudioContribution]
-    internal class Command1 : Command
+    internal class Command2 : Command
     {
         private readonly TraceSource logger;
 
@@ -18,7 +18,7 @@ namespace Extension4WithVSSDK
         /// Initializes a new instance of the <see cref="Command1"/> class.
         /// </summary>
         /// <param name="traceSource">Trace source instance to utilize.</param>
-        public Command1(TraceSource traceSource)
+        public Command2(TraceSource traceSource)
         {
             // This optional TraceSource can be used for logging in the command. You can use dependency injection to access
             // other services here as well.
@@ -26,7 +26,7 @@ namespace Extension4WithVSSDK
         }
 
         /// <inheritdoc />
-        public override CommandConfiguration CommandConfiguration => new("%Extension4WithVSSDK.Command1.DisplayName%")
+        public override CommandConfiguration CommandConfiguration => new("%Extension4WithVSSDK.Command2.DisplayName%")
         {
             // Use this object initializer to set optional parameters for the command. The required parameter,
             // displayName, is set above. DisplayName is localized and references an entry in .vsextension\string-resources.json.
@@ -44,7 +44,7 @@ namespace Extension4WithVSSDK
         /// <inheritdoc />
         public override async Task ExecuteCommandAsync(IClientContext context, CancellationToken cancellationToken)
         {
-            await this.Extensibility.Shell().ShowPromptAsync("Extension4WithVSSDK!", PromptOptions.OK, cancellationToken);
+            await this.Extensibility.Shell().ShowPromptAsync("Comando 2 !!!", PromptOptions.OK, cancellationToken);
         }
     }
 }
